@@ -267,7 +267,9 @@ const isCreating = ref(false)
 
 const handleFileUpload = (event: Event) => {
   const target = event.target as HTMLInputElement
-  if (target.files && target.files.length > 0) selectedFile.value = target.files[0]
+  if (target.files && target.files.length > 0) {
+    selectedFile.value = target.files[0] || null
+  }
 }
 
 const submitEvent = async () => {
@@ -336,7 +338,7 @@ const isUploadingSlip = reactive<Record<string, boolean>>({})
 const selectParticipantSlip = (event: Event, participantId: string) => {
   const target = event.target as HTMLInputElement
   if (target.files && target.files.length > 0) {
-    participantSlips[participantId] = target.files[0]
+    participantSlips[participantId] = target.files[0] || null
   } else {
     participantSlips[participantId] = null
   }
