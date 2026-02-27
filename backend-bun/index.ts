@@ -9,7 +9,17 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const app = new Hono();
 
-app.use('/*', cors());
+app.use(
+  '*',
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'https://g-event-six.vercel.app'
+    ],
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowHeaders: ['Content-Type'],
+  })
+)
 
 app.get('/', (c) => {
   return c.text("🚀 G-Event API is running with Hono!");
