@@ -1,0 +1,15 @@
+{
+  "name": "g-event",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.98.0",
+    "hono": "^4.12.3"
+  }
+}
