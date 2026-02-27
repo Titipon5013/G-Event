@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { createClient } from '@supabase/supabase-js';
 import { cors } from 'hono/cors';
+import { serve } from '@hono/node-server'
 
 const supabaseUrl = process.env.SUPABASE_URL as string;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY as string;
@@ -23,26 +24,6 @@ app.use(
 
 app.get('/', (c) => {
   return c.text("🚀 G-Event API is running with Hono!");
-});
-
-app.get('/api/events', async (c) => {
-  try {
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-
-    const safeData = data.map((event: any) => {
-      delete event.manage_pin;
-      return event;
-    });
-
-    return c.json({ status: "success", data: safeData }, 200);
-  } catch (error: any) {
-    return c.json({ status: "error", message: error.message }, 500);
-  }
 });
 
 app.get('/api/events', async (c) => {
@@ -223,7 +204,8 @@ app.post('/api/events/:eventId/verify-payment', async (c) => {
   }
 });
 
-export default {
-  port: process.env.PORT || 3000,
+
+serve({
   fetch: app.fetch,
-};
+  port: parseInt(process.env.PORT || "3000")
+})

@@ -9,6 +9,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@hono/node-server": "^1.19.9",
     "@supabase/supabase-js": "^2.98.0",
     "cors": "^2.8.6",
     "hono": "^4.12.3"
