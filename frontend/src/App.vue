@@ -245,7 +245,7 @@ const goToHome = () => {
 const fetchEvents = async () => {
   isLoadingEvents.value = true
   try {
-    const res = await fetch(`${apiUrl}/events`)
+    const res = await fetch(`${apiUrl}/api/events`)
     const result = await res.json()
     if(res.ok) events.value = result.data
   } catch (error) {
@@ -285,7 +285,7 @@ const submitEvent = async () => {
       uploadedQrUrl = data.publicUrl
     }
 
-    const res = await fetch(`${apiUrl}/events`, {
+    const res = await fetch(`${apiUrl}/api/events`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, event_time: new Date(form.event_time).toISOString(), qr_image_url: uploadedQrUrl })
@@ -304,7 +304,7 @@ const submitEvent = async () => {
 
 const viewEventDetail = async (eventId: string, mode: 'public' | 'manage' = 'public') => {
   try {
-    const res = await fetch(`${apiUrl}/events/${eventId}`)
+    const res = await fetch(`${apiUrl}/api/events/${eventId}`)
     const result = await res.json()
     if (!res.ok) throw new Error(result.message)
     
@@ -359,7 +359,7 @@ const submitParticipantSlip = async (participantId: string) => {
     const { data } = supabase.storage.from('slips').getPublicUrl(filePath)
     const slipUrl = data.publicUrl
 
-    const res = await fetch(`${apiUrl}/events/${activeEvent.value.id}/participants/${participantId}/slip`, {
+    const res = await fetch(`${apiUrl}/api/events/${activeEvent.value.id}/participants/${participantId}/slip`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ slip_image_url: slipUrl })
@@ -381,7 +381,7 @@ const submitParticipantSlip = async (participantId: string) => {
 
 const verifyPayment = async (participantId: string, status: 'paid' | 'unpaid') => {
   try {
-    const res = await fetch(`${apiUrl}/events/${activeEvent.value.id}/verify-payment`, {
+    const res = await fetch(`${apiUrl}/api/events/${activeEvent.value.id}/verify-payment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -430,7 +430,7 @@ const confirmJoin = async () => {
   if (!selectedEvent.value) return
   isJoining.value = true
   try {
-    const res = await fetch(`${apiUrl}/events/${selectedEvent.value.id}/join`, {
+    const res = await fetch(`${apiUrl}/api/events/${selectedEvent.value.id}/join`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nickname: joinNickname.value })
