@@ -35,26 +35,6 @@ app.get('/api/events', async (c) => {
   }
 });
 
-app.get('/api/events', async (c) => {
-  try {
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-
-    const safeData = data.map((event: any) => {
-      delete event.manage_pin;
-      return event;
-    });
-
-    return c.json({ status: "success", data: safeData }, 200);
-  } catch (error: any) {
-    return c.json({ status: "error", message: error.message }, 500);
-  }
-});
-
 app.get('/test-db', async (c) => {
   try {
     const { data, error } = await supabase.from('events').select('*').limit(1);
