@@ -81,7 +81,7 @@
           <div><label class="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1">Date & Time / เวลานัด</label><input v-model="form.event_time" type="datetime-local" required class="w-full bg-zinc-950 border border-zinc-700 text-white px-4 py-3 focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none [color-scheme:dark]"></div>
           <div><label class="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1">Location / พิกัด</label><input v-model="form.location" type="text" required class="w-full bg-zinc-950 border border-zinc-700 text-white px-4 py-3 focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none"></div>
           <div><label class="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1">Crew Size / จำนวนคน (Max)</label><input v-model="form.max_people" type="number" min="1" placeholder="ไม่จำกัดปล่อยว่าง" class="w-full bg-zinc-950 border border-zinc-700 text-white px-4 py-3 focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none"></div>
-          <div><label class="block text-xs font-bold text-red-500 uppercase tracking-widest mb-1">Leader PIN / รหัสหัวตี้</label><input v-model="form.manage_pin" type="text" maxlength="6" required placeholder="ใส่รหัสลับ 6 หลัก" class="w-full bg-zinc-950 border border-red-900 text-red-500 px-4 py-3 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-center tracking-[0.5em] font-bold"></div>
+          <div><label class="block text-xs font-bold text-red-500 uppercase tracking-widest mb-1">Leader PIN / รหัสหัวดี</label><input v-model="form.manage_pin" type="text" maxlength="6" required placeholder="ใส่รหัสลับ 6 หลัก" class="w-full bg-zinc-950 border border-red-900 text-red-500 px-4 py-3 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-colors placeholder-red-900/50 text-center tracking-[0.5em] font-bold" /></div>
           <div><label class="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1">Money Drop / อัปโหลด QR รับเงิน</label><input type="file" accept="image/*" @change="handleFileUpload" class="w-full text-sm text-zinc-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-bold file:uppercase file:bg-zinc-800 file:text-zinc-300 hover:file:bg-zinc-700 cursor-pointer bg-zinc-950 border border-zinc-700"></div>
           <button type="submit" :disabled="isCreating" class="w-full mt-8 bg-red-700 text-white font-black text-lg py-4 px-4 uppercase tracking-[0.2em] border border-red-500 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all disabled:opacity-50 disabled:cursor-not-allowed">
             {{ isCreating ? 'LOADING...' : 'CREATE SQUAD' }}
@@ -414,7 +414,6 @@ const verifyPayment = async (participantId: string, status: 'paid' | 'unpaid') =
   }
 }
 
-// --- Join Event ---
 const showJoinModal = ref(false)
 const selectedEvent = ref<any>(null)
 const joinNickname = ref('')
