@@ -17,8 +17,8 @@ app.use(
       'http://localhost:5173',
       'https://g-event-six.vercel.app'
     ],
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowHeaders: ['Content-Type'],
+    allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
   })
 )
 
